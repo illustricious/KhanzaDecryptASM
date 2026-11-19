@@ -14,4 +14,12 @@ Build: jalankan build.bat dengan Visual Studio C++ Build Tools. Executable memak
 
 Setelah mengubah `src/main.cpp`, jalankan `src\regenerate-asm.bat` untuk membuat ulang `src/main-x64.s`, lalu jalankan build Assembly lagi.
 
+## Build lintas platform
+
+Unduh executable untuk OS dan arsitektur Anda dari [GitHub Releases](https://github.com/illustricious/KhanzaDecryptASM/releases). Pada Linux, macOS, atau BSD, beri izin eksekusi dengan `chmod +x ./nama-file` lalu jalankan `./nama-file`. Gunakan `SHA256SUMS.txt` untuk memeriksa file hasil unduhan.
+
+Untuk membangun sendiri, pasang Zig 0.15.2 dan jalankan `pwsh -File ./build-platforms.ps1`. Parameter `-Zig` menerima jalur executable Zig, dan `-Targets` dapat dipakai untuk memilih target dari PowerShell. Hasil build ada di `dist/` dan listing Assembly tiap target ada di `dist/assembly/`.
+
+Pada Windows, skrip mengubah implementasi C++ menjadi Assembly lalu merakitnya untuk ARM64, x64, dan x86. Mode default tetap mengikuti code page Windows dan opsi `--utf8` tetap tersedia. Pada sistem lain, implementasi portabel di `src/portable.zig` memakai UTF-8 untuk masukan dan keluaran teks. Saat bertukar data dengan Khanza yang memakai code page lama, karakter non-ASCII perlu memakai pengodean yang sama di kedua sisi. RISC-V ditargetkan untuk Linux.
+
 Uji dummy: node test_compat.js memerlukan Node.js, JDK, dan JAR Khanza pada jalur dalam skrip. Oracle.java memanggil class dari JAR asli. Kompilasi Oracle.java dengan javac dan classpath KhanzaSecurity16bit.jar serta commons-codec-1.12.jar jika Oracle.class belum tersedia.

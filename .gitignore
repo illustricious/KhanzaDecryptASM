@@ -3,3 +3,5 @@
 *.class
 *.pdb
 *.lib
+/dist/
+/.zig-cache/
